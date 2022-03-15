@@ -1,0 +1,11 @@
+---
+- hosts: "{{ target_host }}"
+  become: no
+  serial: "{{ serial }}"
+  gather_facts: yes
+  tasks:
+  - name: "Checking service status"
+    service_facts:
+  - name: "Service status"
+    debug:
+      msg: "{{ansible_facts.services}}"  
