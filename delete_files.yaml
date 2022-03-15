@@ -1,0 +1,17 @@
+---
+- hosts: "{{ target_host }}"
+  become: no
+  tasks:
+  - name: Delete older files
+    find:
+      paths: [/paytm/oauth/backup/,/paytm/users/backup/]
+      patterns: [2017*,2018*,2019*,2020*]
+    register: files_to_delete
+
+  - name: Delete older files
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
+  
+  
