@@ -9,3 +9,6 @@
   - name: "Service status"
     debug:
       msg: "{{ansible_facts.services}}"  
+
+      
+
