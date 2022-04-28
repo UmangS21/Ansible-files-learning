@@ -1,0 +1,5 @@
+    - hosts: servers
+      vars:
+        qualys_agent_activation_key: "{{ lookup('env', 'TEST_QUALYS_AGENT_ACTIVATION_KEY') }}"
+      roles:
+         - { role: shrikeh.qualys-cloud-agent }
