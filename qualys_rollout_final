@@ -1,0 +1,21 @@
+- hosts: "{{ target_host }}"
+  become: yes
+  tasks:
+     - name: copy qualys rpm on remote system
+       copy:
+         src: /tmp/QualysCloudAgent.rpm
+         dest: /tmp
+       tags: ['centos']
+     - name: Install The centos package
+       yum:
+         name: /tmp/QualysCloudAgent.rpm
+         state: present
+     - name : execute qualys executor
+       command: /usr/local/qualys/cloud-agent/bin/qualys-cloud-agent.sh ActivationId=c308c79f-67f4-4b27-9381-ba00447372ce CustomerId=5866b668-2177-5153-8182-3fc0ae5fd420
+       tags : execute_qualys_licence
+     - name: Verify if the qualys was installed successfully
+       shell: rpm -qa | grep qualys
+       register: my_package_check_rpm
+~                                                                               
+~                                                                               
+~  
